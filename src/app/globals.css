@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@plugin 'tailwind-scrollbar';
+
+@plugin "@iconify/tailwind4" {
+  prefix: "iconify";
+  prefixes: line-md, material-symbols-light, token-branded;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@utility page-container {
+  @apply mx-auto w-full p-4 lg:px-8 lg:py-8 md:w-190 lg:w-6xl;
+}
+
+@utility background-interactive {
+  @apply transition bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 hover:dark:bg-neutral-700;
+}
+
+@utility text-standard {
+  @apply text-gray-900 dark:text-white;
+}
+
+@utility text-interactive {
+  @apply text-gray-600 hover:text-black dark:text-white dark:hover:text-gray-400 transition-colors;
+}
+
+@utility text-interactive-group {
+  @apply text-gray-600 group-hover:text-black dark:text-white dark:group-hover:text-gray-400 transition-colors;
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility skeleton-loader {
+  @apply bg-gray-200 dark:bg-gray-800 rounded animate-pulse;
+}
+
+@utility ring-standard {
+  @apply ring-1 ring-gray-200 dark:ring-gray-800;
+}
+
+@utility background-standard {
+  @apply bg-neutral-100 dark:bg-neutral-900;
+}
+
+@utility card-standard {
+  @apply background-standard ring-standard rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden
+}
+
+@utility scrollbar-standard {
+  @apply scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent;
+}
+
+@utility button-hover {
+  @apply hover:bg-gray-50 dark:hover:bg-gray-700 transition;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
