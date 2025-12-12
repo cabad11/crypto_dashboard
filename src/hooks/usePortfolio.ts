@@ -13,7 +13,7 @@ import COINGECKO_ID_MAP from '@/constants/coingeckoIdMap';
 export type ASSET_DATA = {
   chainId: number
   name?: string
-  symbol: string
+  symbol: keyof typeof COINGECKO_ID_MAP
   balance: string
   valueUSD: number
   change24h: number
@@ -27,7 +27,7 @@ type PriceData = {
 type CoingeckoPrices = Record<string, { usd: number, usd_24h_change: number }>;
 
 export const useCoingeckoPrices = () => {
-  const symbols = new Set<string>();
+  const symbols = new Set<keyof typeof COINGECKO_ID_MAP>();
 
   CHAINS.forEach((chain) => {
     symbols.add(chain.nativeCurrency.symbol);
@@ -40,7 +40,7 @@ export const useCoingeckoPrices = () => {
     queryKey: ['prices'],
     queryFn: async () => {
       const ids = Array.from(symbols)
-        .map(sym => COINGECKO_ID_MAP[sym] || sym.toLowerCase())
+        .map(sym => COINGECKO_ID_MAP[sym] ?? sym.toLowerCase())
         .filter(Boolean)
         .join(',');
       const vs = 'usd';
@@ -119,12 +119,12 @@ export function usePortfolio() {
 
     nativeResults.forEach((res, i) => {
       const chain = CHAINS[i];
-      const symbol = chain.nativeCurrency.symbol;
       const balance = res.data ? formatUnits(res.data.value, chain.nativeCurrency.decimals) : '0';
-      const price = prices[symbol].price || 0;
-      const valueUSD = +balance * price;
 
       if (+balance > 0.0001) {
+        const symbol = chain.nativeCurrency.symbol;
+        const price = prices[symbol].price || 0;
+        const valueUSD = +balance * price;
         totalUSD += valueUSD;
         weightedChange += valueUSD * prices[symbol].change24h;
         assets.push({
@@ -142,15 +142,15 @@ export function usePortfolio() {
       const token = ERC20_TOKENS[i];
       const balanceRaw = result.result;
       const balance = formatUnits(balanceRaw ?? BigInt(0), token.decimals);
-      const price = prices[token.symbol].price || 1;
-      const valueUSD = +balance * price;
 
       if (+balance > 0.0001) {
+        const price = prices[token.symbol].price || 1;
+        const valueUSD = +balance * price;
         totalUSD += valueUSD;
         weightedChange += valueUSD * prices[token.symbol].change24h;
         assets.push({
           chainId: token.chainId,
-          name: token?.name,
+          name: 'name' in token ? token.name : undefined,
           symbol: token.symbol,
           change24h: prices[token.symbol].change24h,
           balance,

@@ -1,4 +1,5 @@
 import { mainnet, polygon, arbitrum, base, optimism, bsc, avalanche, gnosis, fantom, zksync, sepolia } from 'wagmi/chains';
+
 type ERC20Token = {
   chainId: number
   symbol: string
@@ -6,7 +7,8 @@ type ERC20Token = {
   address: `0x${string}`
   decimals: number
 };
-export const ERC20_TOKENS: ERC20Token[] = [
+
+export const ERC20_TOKENS = [
   { chainId: mainnet.id, symbol: 'USDC', name: 'USD Coin', address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', decimals: 6 },
   { chainId: mainnet.id, symbol: 'USDT', name: 'Tether', address: '0xdAC17F958D2ee523a2206206994597C13D831ec7', decimals: 6 },
   { chainId: mainnet.id, symbol: 'DAI', address: '0x6B175474E89094C44Da98b954EedeAC495271d0F', decimals: 18 },
@@ -50,4 +52,4 @@ export const ERC20_TOKENS: ERC20Token[] = [
   { chainId: zksync.id, symbol: 'USDC', name: 'USD Coin', address: '0x3355df6D4c9c3035724Fd0e3914dE96A5a83aaf4', decimals: 6 },
 
   { chainId: gnosis.id, symbol: 'USDC', name: 'USD Coin', address: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83', decimals: 6 },
-];
+] as const satisfies ERC20Token[];

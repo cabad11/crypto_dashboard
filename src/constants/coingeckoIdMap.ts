@@ -1,4 +1,4 @@
-const COINGECKO_ID_MAP: Record<string, string> = {
+const COINGECKO_ID_MAP = {
   ETH: 'ethereum',
   MATIC: 'polygon',
   BNB: 'binancecoin',
@@ -21,5 +21,5 @@ const COINGECKO_ID_MAP: Record<string, string> = {
   MKR: 'maker',
   LDO: 'lido-dao',
   BASE: 'base',
-};
+} as const;
 export default COINGECKO_ID_MAP;
