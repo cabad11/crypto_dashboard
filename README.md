@@ -1,6 +1,6 @@
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
-![Vitest](https://img.shields.io/badge/Vitest-1.0-green?logo=vitest)
+![Vitest](https://img.shields.io/badge/Vitest-4.0-green?logo=vitest)
 ![CI](https://github.com/cabad11/crypto_dashboard/actions/workflows/ci.yml/badge.svg)
 ![Coverage](https://img.shields.io/codecov/c/github/cabad11/crypto_dashboard?logo=codecov)
 # Crypto Portfolio Tracker
@@ -48,11 +48,12 @@ npm start
 ```bash
 npm run test          
 npm run test:coverage
+```
 
 ### Tech Stack
--Next.js 16
--Wagmi v2 + viem
--Tailwind CSS
--TanStack Query
--Coingecko API (prices)
--Etherscan APIs (transactions)
+- Next.js 16
+- Wagmi v2 + viem
+- Tailwind CSS
+- TanStack Query
+- Coingecko API (prices)
+- Etherscan APIs (transactions)

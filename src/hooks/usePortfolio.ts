@@ -84,9 +84,9 @@ const ERC20_ABI = [
 export function usePortfolio() {
   const { address, isConnected } = useConnection();
   const queryClient = useQueryClient();
-  const { data: prices, isError: pricesErr, refetch: pricesRefetch } = useCoingeckoPrices();
+  const { data: prices, isError: pricesIsErr, refetch: pricesRefetch, error: pricesErr, isPending: pricesIsPending } = useCoingeckoPrices();
 
-  const { data: erc20Data, isPending: erc20OPending, isError: erc20Error, refetch: erc20Refetch } = useReadContracts({
+  const { data: erc20Data, isPending: erc20IsPending, isError: erc20IsError, refetch: erc20Refetch, error: erc20Error } = useReadContracts({
     contracts: ERC20_TOKENS.map(t => ({
       chainId: t.chainId,
       address: t.address,
@@ -110,8 +110,9 @@ export function usePortfolio() {
     queryClient.invalidateQueries({ queryKey: ['native'] });
   };
 
+  const isPending = erc20IsPending || nativeResults.some(r => r.isPending) || !isConnected || pricesIsPending;
   const portfolio = useMemo(() => {
-    if (!isConnected || !address || !prices) return null;
+    if (isPending || !prices) return null;
 
     const assets: ASSET_DATA[] = [];
     let totalUSD = 0;
@@ -163,13 +164,16 @@ export function usePortfolio() {
     const totalChange24h = totalUSD > 0 ? weightedChange / totalUSD : 0;
 
     return { totalUSD, assets, change24h: totalChange24h };
-  }, [address, isConnected, prices, erc20Data, nativeResults]);
+  }, [isPending, prices, erc20Data, nativeResults]);
 
-  const isPending = erc20OPending || nativeResults.some(r => r.isPending) || !isConnected;
-  const isError = nativeResults.some(r => r.isError) || erc20Error || pricesErr;
+  const isError = nativeResults.some(r => r.isError) || erc20IsError || pricesIsErr;
+  if (isError) {
+    console.error('Portfolio error message', erc20Error, pricesIsErr);
+  }
+
   const refetch = () => {
     if (pricesErr) pricesRefetch();
-    if (erc20Error) erc20Refetch();
+    if (erc20IsError) erc20Refetch();
     nativeResults.forEach((r) => {
       if (r.isError) r.refetch();
     });

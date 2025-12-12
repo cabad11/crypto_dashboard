@@ -4,10 +4,10 @@ import { test as testBase } from 'vitest';
 
 export const worker = setupWorker(...handlers);
 
-export const test = testBase.extend({
+export const it = testBase.extend({
   worker: [
     async ({}, use) => {
-      await worker.start({ onUnhandledRequest: 'bypass' });
+      await worker.start();
 
       await use(worker);
       worker.resetHandlers();
