@@ -1,3 +1,8 @@
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Vitest](https://img.shields.io/badge/Vitest-1.0-green?logo=vitest)
+![CI](https://github.com/cabad11/crypto_dashboard/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://img.shields.io/codecov/c/github/cabad11/crypto_dashboard?logo=codecov)
 # Crypto Portfolio Tracker
 
 A modern, multi-chain portfolio tracker inspired.  
@@ -51,5 +56,3 @@ npm run test:coverage
 -TanStack Query
 -Coingecko API (prices)
 -Etherscan APIs (transactions)
-
-[![Coverage](https://img.shields.io/badge/coverage-87%25-green)](coverage/lcov-report/index.html)
