@@ -11,8 +11,8 @@ export function PortfolioCard({ asset }: { asset: ASSET_DATA }) {
       <div className="flex items-center gap-4 mb-5">
         <TokenLogo chainId={asset.chainId} symbol={asset.symbol} />
         <div>
-          {asset.name && (<h3 className="font-semibold text-standard">{asset.name}</h3>)}
-          <p className="text-sm text-interactive">{asset.symbol}</p>
+          <h3 className="font-semibold text-standard">{asset.name || asset.symbol}</h3>
+          {asset.name && <p className="text-sm text-interactive">{asset.symbol}</p>}
         </div>
       </div>
 

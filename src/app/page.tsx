@@ -10,7 +10,7 @@ export default function Home() {
         <TransactionsHistory />
       </div>
       <div className="mt-8">
-        <h3 className="text-lg font-semibold text-standard mb-4">Your Assets</h3>
+        <h2 className="text-lg font-semibold text-standard mb-4">Your Assets</h2>
         <PortfolioGrid />
       </div>
     </main>

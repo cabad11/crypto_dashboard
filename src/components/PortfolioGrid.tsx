@@ -18,6 +18,8 @@ export function PortfolioGrid() {
           <div key={i} className="h-40 skeleton-loader rounded-xl" />
         ))
       )}
+      {assets.length === 0 && !isPending && (
+        <p className="col-span-full text-center text-gray-500">No assets found</p>)}
       {assets.map(asset => (
         <PortfolioCard key={asset.chainId + asset.symbol} asset={asset} />
       ))}
