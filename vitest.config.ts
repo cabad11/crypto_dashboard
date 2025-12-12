@@ -11,7 +11,7 @@ export default defineConfig({
       {
         extends: true,
         test: {
-          include: ['src/components/**/__tests__/*.test.tsx', 'src/hooks/**/*.test.tsx'],
+          include: ['src/components/**/__tests__/*.test.tsx', 'src/hooks/**/__tests__/*.test.tsx'],
           name: 'browser',
           setupFiles: './src/tests/setup-browser.ts',
           browser: {
@@ -37,7 +37,7 @@ export default defineConfig({
     ],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html'],
+      reporter: ['text', 'html', 'lcov'],
       exclude: ['node_modules', 'src/tests'],
     },
   },

@@ -7,8 +7,12 @@ export function PortfolioCard({ asset }: { asset: ASSET_DATA }) {
   const isPositive = asset.change24h >= 0;
 
   return (
-    <div className="background-standard ring-standard rounded-3xl p-6 shadow hover:shadow-xl transition-shadow">
-      <div className="flex items-center gap-4 mb-5">
+    <div className={`
+      rounded-3xl background-standard p-6 shadow ring-standard transition-shadow
+      hover:shadow-xl
+    `}
+    >
+      <div className="mb-5 flex items-center gap-4">
         <TokenLogo chain={asset.chain} symbol={asset.symbol} />
         <div>
           <h3 className="font-semibold text-standard">
@@ -30,7 +34,13 @@ export function PortfolioCard({ asset }: { asset: ASSET_DATA }) {
           {asset.symbol}
         </p>
         {asset.change24h && (
-          <p className={`text-sm font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
+          <p className={`
+            text-sm font-medium
+            ${isPositive
+            ? 'text-green-600'
+            : `text-red-600`}
+          `}
+          >
             {isPositive ? '+' : ''}
             {asset.change24h.toFixed(2)}
             %

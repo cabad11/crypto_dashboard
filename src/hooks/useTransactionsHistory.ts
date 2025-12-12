@@ -1,6 +1,6 @@
 'use client';
 
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useConnection } from 'wagmi';
 
 export type Transaction = {
@@ -15,11 +15,6 @@ export type Transaction = {
 
 export function useTransactionHistory(chainId: number) {
   const { address, isConnected } = useConnection();
-  const queryClient = useQueryClient();
-
-  const refresh = () => {
-    queryClient.invalidateQueries({ queryKey: ['txs', chainId, address] });
-  };
 
   const result = useInfiniteQuery<Transaction[]>({
     queryKey: ['txs', chainId, address],
@@ -38,5 +33,5 @@ export function useTransactionHistory(chainId: number) {
     enabled: isConnected && !!address,
   });
 
-  return { ...result, refresh };
+  return { ...result };
 }

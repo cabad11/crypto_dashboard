@@ -47,6 +47,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(results);
   }
   catch (error) {
+    console.error('ERROR api/transactions: ' + error);
     return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
   }
 }

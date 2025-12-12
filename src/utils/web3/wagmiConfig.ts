@@ -1,5 +1,5 @@
 import { http, createConfig } from 'wagmi';
-import { metaMask, walletConnect } from 'wagmi/connectors';
+import { metaMask } from 'wagmi/connectors';
 import { CHAINS } from '../../constants/chains';
 
 // const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string;

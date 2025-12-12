@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render } from '@testing-library/react';
-import { page } from 'vitest/browser';
+import { describe, expect, vi } from 'vitest';
+import { it } from '@/tests/mocks/browser';
+import { render } from 'vitest-browser-react';
 import { PortfolioGrid } from '../PortfolioGrid';
 import { ERC20_TOKENS } from '@/constants/tokens';
 import { ASSET_DATA } from '@/hooks/usePortfolio';
@@ -49,14 +49,14 @@ vi.mock('@/hooks/usePortfolio', () => ({
 }));
 
 describe('PortfolioGrid', () => {
-  it('renders loading skeleton when isLoading is true', async () => {
+  it('renders loading skeleton when isPending is true', async () => {
     await mocks.usePortfolio.withImplementation(() => ({
       data: undefined,
       isPending: true,
       isError: false,
       refetch: () => {} }), async () => {
-      render(<PortfolioGrid />);
-      const skeletons = await page.getByTestId('asset-skeleton');
+      const screen = await render(<PortfolioGrid />);
+      const skeletons = await screen.getByTestId('asset-skeleton');
       await expect.element(skeletons.first()).toBeInTheDocument();
       expect(skeletons.all()).toHaveLength(8);
     });
@@ -68,42 +68,44 @@ describe('PortfolioGrid', () => {
       isPending: false,
       isError: false,
       refetch: () => {} }), async () => {
-      render(<PortfolioGrid />);
-      await expect.element(page.getByText('No assets found')).toBeInTheDocument();
+      const screen = await render(<PortfolioGrid />);
+      await expect.element(screen.getByText('No assets found')).toBeInTheDocument();
     });
   });
 
   it('displays token symbol, chain name, balance, usd value, 24h change correctly', async () => {
-    render(<PortfolioGrid />);
+    const screen = await render(<PortfolioGrid />);
 
-    await expect.element(page.getByRole('heading', { name: 'Ether (ETH)' })).toBeInTheDocument();
-    await expect.element(page.getByRole('heading', { name: 'BASE' })).toBeInTheDocument();
-    await expect.element(page.getByRole('heading', { name: 'Tether (USDT)' })).toBeInTheDocument();
+    await expect.element(screen.getByRole('heading', { name: 'Ether (ETH)' })).toBeInTheDocument();
+    await expect.element(screen.getByRole('heading', { name: 'BASE' })).toBeInTheDocument();
+    await expect.element(screen.getByRole('heading', { name: 'Tether (USDT)' })).toBeInTheDocument();
 
-    await expect.element(page.getByText(mainnet.name, { exact: true })).toBeInTheDocument();
-    await expect.element(page.getByText(base.name, { exact: true }), {}).toBeInTheDocument();
-    await expect.element(page.getByText(polygon.name, { exact: true }), {}).toBeInTheDocument();
+    // Network names
+    await expect.element(screen.getByText(mainnet.name, { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText(base.name, { exact: true }), {}).toBeInTheDocument();
+    await expect.element(screen.getByText(polygon.name, { exact: true }), {}).toBeInTheDocument();
 
-    await expect.element(page.getByText('1.5 ETH', { exact: true })).toBeInTheDocument();
-    await expect.element(page.getByText('$4,800', { exact: true })).toBeInTheDocument();
-    await expect.element(page.getByText('1,000 BASE', { exact: true })).toBeInTheDocument();
-    await expect.element(page.getByText('$1,000', { exact: true })).toBeInTheDocument();
-    await expect.element(page.getByText('200 USDT', { exact: true })).toBeInTheDocument();
-    await expect.element(page.getByText('$200', { exact: true })).toBeInTheDocument();
+    // Token balances and USD values
+    await expect.element(screen.getByText('1.5 ETH', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('$4,800', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('1,000 BASE', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('$1,000', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('200 USDT', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('$200', { exact: true })).toBeInTheDocument();
 
     // 24h change
-    await expect.element(page.getByText('-2.00%', { exact: true })).toBeInTheDocument();
-    await expect.element(page.getByText('+0.01%', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('-2.00%', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('+0.01%', { exact: true })).toBeInTheDocument();
   });
 
   it('show token and network logo correctly', async () => {
-    render(<PortfolioGrid />);
+    const screen = await render(<PortfolioGrid />);
 
-    const images = await page.getByRole('img').elements();
+    const images = await screen.getByRole('img').elements();
     expect(images).toHaveLength(4); // 3 tokens + 1 network(BASE)
-    await expect.element(page.getByAltText('BASE Icon')).toBeInTheDocument();
-    await expect.element(page.getByLabelText('ETH Icon')).toBeInTheDocument();
-    await expect.element(page.getByLabelText('USDT Icon')).toBeInTheDocument();
-    await expect.element(page.getByLabelText('Polygon Network Icon')).toBeInTheDocument();
+    await expect.element(screen.getByAltText('BASE Icon')).toBeInTheDocument();
+    await expect.element(screen.getByLabelText('ETH Icon')).toBeInTheDocument();
+    await expect.element(screen.getByLabelText('USDT Icon')).toBeInTheDocument();
+    await expect.element(screen.getByLabelText('Polygon Network Icon')).toBeInTheDocument();
   });
 });

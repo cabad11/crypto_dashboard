@@ -24,10 +24,8 @@ export const ERC20_TOKENS = [
 
   { chainId: polygon.id, symbol: 'USDC', name: 'USD Coin', address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', decimals: 6 },
   { chainId: polygon.id, symbol: 'USDT', name: 'Tether', address: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F', decimals: 6 },
-  { chainId: polygon.id, symbol: 'DAI', address: '0x8f3Cf7ad23Cd3CaDb8A5F034B7f4D7A5C4C4D4C4', decimals: 18 },
   { chainId: polygon.id, symbol: 'WETH', name: 'Wrapped ETH', address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', decimals: 18 },
   { chainId: polygon.id, symbol: 'WBTC', name: 'Wrapped BTC', address: '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6', decimals: 8 },
-  { chainId: polygon.id, symbol: 'POL', name: 'Polygon', address: '0x455e53cbb86018ac2b8092fdcd39d8444affc3f6', decimals: 8 },
 
   { chainId: arbitrum.id, symbol: 'USDC', name: 'USD Coin', address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831', decimals: 6 },
   { chainId: arbitrum.id, symbol: 'USDT', name: 'Tether', address: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9', decimals: 6 },
@@ -41,15 +39,15 @@ export const ERC20_TOKENS = [
   { chainId: optimism.id, symbol: 'USDT', name: 'Tether', address: '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58', decimals: 6 },
   { chainId: optimism.id, symbol: 'OP', name: 'Optimism', address: '0x4200000000000000000000000000000000000042', decimals: 18 },
 
-  { chainId: bsc.id, symbol: 'USDC', name: 'USD Coin', address: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580', decimals: 18 },
+  { chainId: bsc.id, symbol: 'USDC', name: 'USD Coin', address: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', decimals: 18 },
   { chainId: bsc.id, symbol: 'USDT', name: 'Tether', address: '0x55d398326f99059fF775485246999027B3197955', decimals: 18 },
 
-  { chainId: avalanche.id, symbol: 'USDC', name: 'USD Coin', address: '0xB97EF9Ef8734c71904D8002F8b6Bc66Dd9c48a6', decimals: 6 },
-  { chainId: avalanche.id, symbol: 'USDT', name: 'Tether', address: '0x9702230A8Ea53601f5cD2dc00d457491C2E7E4', decimals: 6 },
+  { chainId: avalanche.id, symbol: 'USDC', name: 'USD Coin', address: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', decimals: 6 },
+  { chainId: avalanche.id, symbol: 'USDT', name: 'Tether', address: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7', decimals: 6 },
 
   { chainId: fantom.id, symbol: 'USDC', name: 'USD Coin', address: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', decimals: 6 },
 
-  { chainId: zksync.id, symbol: 'USDC', name: 'USD Coin', address: '0x3355df6D4c9c3035724Fd0e3914dE96A5a83aaf4', decimals: 6 },
+  { chainId: zksync.id, symbol: 'USDC', name: 'USD Coin', address: '0x1d17CBcF0D6D143135aE902365D2E5e2A16538D4', decimals: 6 },
 
   { chainId: gnosis.id, symbol: 'USDC', name: 'USD Coin', address: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83', decimals: 6 },
 ] as const satisfies ERC20Token[];

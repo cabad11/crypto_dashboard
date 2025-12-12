@@ -20,13 +20,13 @@ enum TransactionType {
 export function TransactionHistory() {
   const { address } = useConnection();
   const [chain, setChain] = useState<typeof CHAINS[number]>(CHAINS[0]);
-  const { data, refresh, isPending, isError, refetch } = useTransactionHistory(chain.id);
+  const { data, isPending, isError, refetch } = useTransactionHistory(chain.id);
 
   return (
     <div className="card-standard">
-      <RefreshButton onClick={refresh} className="w-10 h-10" />
+      <RefreshButton onClick={refetch} className="h-10 w-10" />
       <ChainSelect chain={chain} onChange={setChain} />
-      <div className="flex flex-col gap-2 mt-4 max-h-96 overflow-y-auto">
+      <div className="mt-4 flex max-h-96 flex-col gap-2 overflow-y-auto">
         {isError && (
           <ErrorMessage message="Failed to load transactions" refetch={refetch} />
         )}
@@ -60,13 +60,40 @@ export function TransactionHistory() {
                     target="_blank"
                     rel="noopener noreferrer"
                     key={tx.hash}
-                    className="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition rounded-lg p-1"
+                    className={`
+                      rounded-lg p-1 transition
+                      hover:bg-slate-50
+                      dark:hover:bg-slate-700/50
+                    `}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className={`p-1 flex-center rounded-full ${isOutgoing ? 'bg-red-100 dark:bg-red-900/30' : 'bg-green-100 dark:bg-green-900/30'}`}>
-                          <span className={clsx('iconify material-symbols-light--arrow-right-alt w-5 h-5 transform-gpu',
-                            isOutgoing ? 'text-red-600 dark:text-red-400 rotate-90' : 'text-green-600 dark:text-green-400 -rotate-90')}
+                        <div className={`
+                          flex-center rounded-full p-1
+                          ${isOutgoing
+                    ? `
+                      bg-red-100
+                      dark:bg-red-900/30
+                    `
+                    : `
+                      bg-green-100
+                      dark:bg-green-900/30
+                    `}
+                        `}
+                        >
+                          <span className={clsx(`
+                            iconify h-5 w-5 transform-gpu
+                            material-symbols-light--arrow-right-alt
+                          `,
+                          isOutgoing
+                            ? `
+                              rotate-90 text-red-600
+                              dark:text-red-400
+                            `
+                            : `
+                              -rotate-90 text-green-600
+                              dark:text-green-400
+                            `)}
                           />
                         </div>
                         <div>
@@ -81,8 +108,20 @@ export function TransactionHistory() {
                         </div>
                       </div>
 
-                      <div className="text-right flex">
-                        <p className={`font-semibold ${isOutgoing ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                      <div className="flex text-right">
+                        <p className={`
+                          font-semibold
+                          ${isOutgoing
+                    ? `
+                      text-red-600
+                      dark:text-red-400
+                    `
+                    : `
+                      text-green-600
+                      dark:text-green-400
+                    `}
+                        `}
+                        >
                           {isOutgoing ? '-' : '+'}
                           {Number((Number(tx.value) / 10 ** chain.nativeCurrency.decimals).toFixed(6))}
                           {' '}

@@ -29,14 +29,31 @@ const PortfolioChart = () => {
     <div className="card-standard">
       <RefreshButton onClick={refresh} />
       <div className="mb-4">
-        <h2 className="text-sm text-standard opacity-70 mb-1 md:mb-2">Total Portfolio Value</h2>
+        <h2 className={`
+          mb-1 text-sm text-standard opacity-70
+          md:mb-2
+        `}
+        >
+          Total Portfolio Value
+        </h2>
         {isPending
-          ? (<div className="skeleton-loader w-48 h-10" />)
+          ? (<div className="h-10 w-48 skeleton-loader" />)
           : (
-              <div className="flex items-baseline text-xl md:text-5xl font-bold text-standard">
+              <div className={`
+                flex items-baseline text-xl font-bold text-standard
+                md:text-5xl
+              `}
+              >
                 $
                 {data?.totalUSD.toLocaleString('en-US', { currency: 'USD' })}
-                <div className={`flex items-center gap-1.5 mt-3 text-xs md:text-lg font-semibold ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
+                <div className={`
+                  mt-3 flex items-center gap-1.5 text-xs font-semibold
+                  md:text-lg
+                  ${isPositive
+                ? `text-green-600`
+                : `text-red-600`}
+                `}
+                >
                   {data?.change24h as number > 0 ? '↑' : '↓'}
                   {' '}
                   {Math.abs(data?.change24h as number).toFixed(2)}
@@ -46,14 +63,21 @@ const PortfolioChart = () => {
             )}
       </div>
 
-      <div className="w-full h-64 md:h-80 lg:h-96 -mx-6 md:-mx-3 text-xs md:text-sm">
+      <div className={`
+        -mx-6 h-64 w-full text-xs
+        md:-mx-3 md:h-80 md:text-sm
+        lg:h-96
+      `}
+      >
         {history.isError && (
           <ErrorMessage
             message="Failed to load history data"
             refetch={history.refetch}
           />
         )}
-        {history.isPending && (<div className="skeleton-loader w-full h-full rounded-2xl" />)}
+        {history.isPending && (
+          <div className="h-full w-full skeleton-loader rounded-2xl" />
+        )}
         {history?.history && history?.history?.length !== 0 && (
           <>
             <div className="flex items-center justify-end gap-3">
@@ -61,11 +85,19 @@ const PortfolioChart = () => {
                 <button
                   key={p}
                   onClick={() => setPeriod(p as Period)}
-                  className={`px-2 py-1 text-xs md:px-4 md:py-2 md:text-sm rounded-lg  font-medium transition ${
-                    period === p
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                  }`}
+                  className={`
+                    rounded-lg px-2 py-1 text-xs font-medium transition
+                    md:px-4 md:py-2 md:text-sm
+                    ${
+                period === p
+                  ? 'bg-blue-600 text-white'
+                  : `
+                    bg-gray-200 text-gray-700
+                    hover:bg-gray-300
+                    dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600
+                  `
+                }
+                  `}
                 >
                   {p === 'all' ? 'All Time' : p.toUpperCase()}
                 </button>
@@ -76,7 +108,11 @@ const PortfolioChart = () => {
                 data={history.history}
                 margin={{ top: 10, right: 10, bottom: 10 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-gray-800" />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#e2e8f0"
+                  className="dark:stroke-gray-800"
+                />
                 <XAxis dataKey="date" tickFormatter={dateFormatter} stroke="#94a3b8" />
                 <YAxis stroke="#94a3b8" />
                 <Tooltip formatter={(v: number) => [`$${v.toFixed(2)}`, 'USD amount']} labelFormatter={date => new Date(date).toLocaleString('en')} contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '12px', color: 'white' }} />

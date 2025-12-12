@@ -1,8 +1,9 @@
 'use client';
 
+import { CHAINS } from '@/constants/chains';
 import { ASSET_DATA } from '@/hooks/usePortfolio';
 import Image from 'next/image';
-import { mainnet, polygon, arbitrum, base, optimism, bsc, avalanche, gnosis, fantom, zksync, bscTestnet, sepolia } from 'wagmi/chains';
+import { mainnet, polygon, arbitrum, base, optimism, bsc, avalanche, gnosis, fantom, zksync, sepolia } from 'wagmi/chains';
 
 enum SourceType {
   ICONIFY,
@@ -32,7 +33,7 @@ const TOKEN_LOGO_MAP: Record<string, LogoSource> = {
   xDAI: { path: '/icons/xdai.png', type: SourceType.IMAGE_URL },
 };
 
-const CHAIN_ID_LOGO_MAP: Record<string, LogoSource> = {
+const CHAIN_ID_LOGO_MAP: Record<typeof CHAINS[number]['id'], LogoSource> = {
   [mainnet.id]: { path: 'token-branded--eth', type: SourceType.ICONIFY },
   [polygon.id]: { path: 'token-branded--polygon', type: SourceType.ICONIFY },
   [arbitrum.id]: { path: 'token-branded--arbitrum-one', type: SourceType.ICONIFY },
@@ -48,20 +49,43 @@ const CHAIN_ID_LOGO_MAP: Record<string, LogoSource> = {
 
 const LogoSource = ({ source, size, alt }: { source: LogoSource | string, size: number, alt: string }) => {
   if (typeof source === 'string') {
-    return <div className="flex-center size-full rounded-full bg-gray-400 dark:bg-gray-200">{source}</div>;
+    return (
+      <div className={`
+        flex-center size-full rounded-full bg-gray-400
+        dark:bg-gray-200
+      `}
+      >
+        {source}
+      </div>
+    );
   }
   return source.type === SourceType.IMAGE_URL
     ? <Image src={source.path} width={size} height={size} alt={alt} />
-    : <span role="img" aria-label={alt} className={`iconify-color ${source.path} size-full`} />;
+    : (
+        <span
+          role="img"
+          aria-label={alt}
+          className={`
+            iconify-color
+            ${source.path}
+            size-full
+          `}
+        />
+      );
 };
 
 export const TokenLogo: React.FC<{ symbol: string, chain: ASSET_DATA['chain'] }> = ({ symbol, chain }) => {
   const isNative = TOKEN_LOGO_MAP[symbol]?.path === CHAIN_ID_LOGO_MAP[chain.id].path;
   return (
-    <div className="size-8 relative">
+    <div className="relative size-8">
       <LogoSource source={TOKEN_LOGO_MAP[symbol] || symbol} size={32} alt={`${symbol} Icon`} />
       {!isNative && (
-        <div className="absolute -bottom-1 -right-1 size-5 rounded-full border-2 border-white dark:border-gray-900 bg-gray-100 dark:bg-gray-800 flex-center">
+        <div className={`
+          absolute -right-1 -bottom-1 flex-center size-5 rounded-full border-2
+          border-white bg-gray-100
+          dark:border-gray-900 dark:bg-gray-800
+        `}
+        >
           <LogoSource source={CHAIN_ID_LOGO_MAP[chain.id] || chain.name} size={8} alt={`${chain.name} Network Icon`} />
         </div>
       )}
@@ -71,7 +95,7 @@ export const TokenLogo: React.FC<{ symbol: string, chain: ASSET_DATA['chain'] }>
 
 export const NetworkLogo: React.FC<{ chain: ASSET_DATA['chain'] }> = ({ chain }) => {
   return (
-    <div className="size-8 relative">
+    <div className="relative size-8">
       <LogoSource source={CHAIN_ID_LOGO_MAP[chain.id] || chain.name} size={32} alt={`${chain.name} Network Icon`} />
     </div>
   );

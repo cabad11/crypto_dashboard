@@ -26,7 +26,9 @@ const ConnectButton = ({ connector, connect, isPending }: { connector: Connector
         connect({ connector }, { onSuccess: close, onSettled: () => setIsConnecting(false) });
       }}
       disabled={isPending}
-      className="w-full flex items-center gap-3 p-4 rounded-lg ring-standard button-hover"
+      className={`
+        flex w-full items-center gap-3 rounded-lg button-hover p-4 ring-standard
+      `}
     >
       {icon && <Image width={32} height={32} className="text-2xl" src={icon} alt="wallet_icon" />}
       <span className="font-medium text-standard">
@@ -47,24 +49,42 @@ const ConnectWalletPopup = ({ open, onClose }: { open: boolean, onClose: () => v
     }
   };
   return (
-    <Dialog open={open} onClose={handleClose} className="fixed top-0 min-h-full z-50 w-screen flex-center">
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      className="fixed top-0 z-50 flex-center min-h-full w-screen"
+    >
       <DialogBackdrop
         transition
-        className="absolute inset-0 bg-black/30 duration-300 ease-out data-closed:opacity-0"
+        className={`
+          absolute inset-0 bg-black/30 duration-300 ease-out
+          data-closed:opacity-0
+        `}
       />
       <DialogPanel
         transition
-        className="relative z-60 background-standard inset-2 flex-center flex-col rounded-lg w-xs h-min p-6 duration-300 ease-out data-closed:scale-95 data-closed:opacity-0 ring-standard"
+        className={`
+          relative inset-2 z-60 flex-center h-min w-xs flex-col rounded-lg
+          background-standard p-6 ring-standard duration-300 ease-out
+          data-closed:scale-95 data-closed:opacity-0
+        `}
       >
         {isConnected && (
-          <CloseButton className="group absolute right-2 top-2 cursor-pointer">
-            <span className="iconify material-symbols-light--close-small-rounded h-8 w-8 text-interactive-group" />
+          <CloseButton className="group absolute top-2 right-2 cursor-pointer">
+            <span className={`
+              iconify h-8 w-8 text-interactive-group
+              material-symbols-light--close-small-rounded
+            `}
+            />
           </CloseButton>
         ) }
-        <DialogTitle className="text-lg font-bold mb-6 text-center text-standard">
+        <DialogTitle className={`
+          mb-6 text-center text-lg font-bold text-standard
+        `}
+        >
           Connect a Wallet
         </DialogTitle>
-        <div className="space-y-3 w-full">
+        <div className="w-full space-y-3">
           {connectors.map(connector => (
             <ConnectButton
               key={connector.id}
@@ -74,7 +94,11 @@ const ConnectWalletPopup = ({ open, onClose }: { open: boolean, onClose: () => v
             />
           ))}
           {error && (
-            <p className="mt-4 text-sm text-red-600 dark:text-red-400">
+            <p className={`
+              mt-4 text-sm text-red-600
+              dark:text-red-400
+            `}
+            >
               {error.message || 'Failed to connect wallet'}
             </p>
           )}

@@ -1,10 +1,21 @@
 const ErrorMessage = ({ message, refetch }: { message: string, refetch: () => void }) => {
   return (
-    <div className="bg-red-50 dark:bg-red-900/20 rounded-3xl p-6 text-center">
-      <p className="text-red-600 dark:text-red-400 font-medium">
+    <div className={`
+      rounded-3xl bg-red-50 p-6 text-center
+      dark:bg-red-900/20
+    `}
+    >
+      <p className={`
+        font-medium text-red-600
+        dark:text-red-400
+      `}
+      >
         {message}
       </p>
-      <button onClick={() => refetch()} className="mt-3 text-sm underline cursor-pointer">
+      <button
+        onClick={() => refetch()}
+        className="mt-3 cursor-pointer text-sm underline"
+      >
         Try again
       </button>
     </div>

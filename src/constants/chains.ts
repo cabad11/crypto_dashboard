@@ -1,4 +1,4 @@
-import { mainnet, polygon, arbitrum, base, optimism, bsc, avalanche, gnosis, fantom, zksync, bscTestnet, sepolia } from 'wagmi/chains';
+import { mainnet, polygon, arbitrum, base, optimism, bsc, avalanche, gnosis, fantom, zksync, sepolia } from 'wagmi/chains';
 
 export const CHAINS = [
   mainnet,
