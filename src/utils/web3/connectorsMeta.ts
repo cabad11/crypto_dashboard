@@ -11,7 +11,7 @@ export interface ConnectorMeta {
   deepLink?: string
 }
 
-export const ALL_CONNECTOR_META: ConnectorMeta[] = [
+export const ALL_CONNECTOR_META = [
   {
     id: 'metaMaskSDK',
     name: 'MetaMask',
@@ -71,7 +71,7 @@ export const ALL_CONNECTOR_META: ConnectorMeta[] = [
     name: 'Zerion',
     shortName: 'Zerion',
   },
-];
+] as const;
 
 export const getConnectorMeta = (connector: Connector): ConnectorMeta | undefined => {
   return ALL_CONNECTOR_META.find(m => m.id === connector.id);

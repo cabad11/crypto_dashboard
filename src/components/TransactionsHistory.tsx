@@ -19,7 +19,7 @@ enum TransactionType {
 
 export function TransactionHistory() {
   const { address } = useConnection();
-  const [chain, setChain] = useState(CHAINS[0]);
+  const [chain, setChain] = useState<typeof CHAINS[number]>(CHAINS[0]);
   const { data, refresh, isPending, isError, refetch } = useTransactionHistory(chain.id);
 
   return (
@@ -65,7 +65,7 @@ export function TransactionHistory() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className={`p-1 flex-center rounded-full ${isOutgoing ? 'bg-red-100 dark:bg-red-900/30' : 'bg-green-100 dark:bg-green-900/30'}`}>
-                          <span className={clsx('iconify material-symbols-light--arrow-right-alt w-5 h-5 text-red-600 dark:text-red-400 transform-gpu',
+                          <span className={clsx('iconify material-symbols-light--arrow-right-alt w-5 h-5 transform-gpu',
                             isOutgoing ? 'text-red-600 dark:text-red-400 rotate-90' : 'text-green-600 dark:text-green-400 -rotate-90')}
                           />
                         </div>

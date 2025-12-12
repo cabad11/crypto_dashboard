@@ -29,13 +29,13 @@ const PortfolioChart = () => {
     <div className="card-standard">
       <RefreshButton onClick={refresh} />
       <div className="mb-4">
-        <p className="text-sm text-standard opacity-70 mb-1 md:mb-2">Total Portfolio Value</p>
+        <h2 className="text-sm text-standard opacity-70 mb-1 md:mb-2">Total Portfolio Value</h2>
         {isPending
           ? (<div className="skeleton-loader w-48 h-10" />)
           : (
               <div className="flex items-baseline text-xl md:text-5xl font-bold text-standard">
                 $
-                {data?.totalUSD.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {data?.totalUSD.toLocaleString('en-US', { currency: 'USD' })}
                 <div className={`flex items-center gap-1.5 mt-3 text-xs md:text-lg font-semibold ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
                   {data?.change24h as number > 0 ? '↑' : '↓'}
                   {' '}
@@ -74,7 +74,7 @@ const PortfolioChart = () => {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={history.history}
-                margin={{ top: 10, right: 10, bottom: 0 }}
+                margin={{ top: 10, right: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-gray-800" />
                 <XAxis dataKey="date" tickFormatter={dateFormatter} stroke="#94a3b8" />

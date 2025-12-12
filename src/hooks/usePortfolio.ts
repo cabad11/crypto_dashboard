@@ -11,7 +11,7 @@ import { formatUnits } from 'viem';
 import COINGECKO_ID_MAP from '@/constants/coingeckoIdMap';
 
 export type ASSET_DATA = {
-  chainId: number
+  chain: typeof CHAINS[number]
   name?: string
   symbol: keyof typeof COINGECKO_ID_MAP
   balance: string
@@ -128,7 +128,7 @@ export function usePortfolio() {
         totalUSD += valueUSD;
         weightedChange += valueUSD * prices[symbol].change24h;
         assets.push({
-          chainId: chain.id,
+          chain: chain,
           change24h: prices[symbol].change24h,
           symbol,
           name: chain.nativeCurrency.name,
@@ -144,12 +144,13 @@ export function usePortfolio() {
       const balance = formatUnits(balanceRaw ?? BigInt(0), token.decimals);
 
       if (+balance > 0.0001) {
+        const chain = CHAINS.find(c => c.id === token.chainId)!;
         const price = prices[token.symbol].price || 1;
         const valueUSD = +balance * price;
         totalUSD += valueUSD;
         weightedChange += valueUSD * prices[token.symbol].change24h;
         assets.push({
-          chainId: token.chainId,
+          chain: chain,
           name: 'name' in token ? token.name : undefined,
           symbol: token.symbol,
           change24h: prices[token.symbol].change24h,

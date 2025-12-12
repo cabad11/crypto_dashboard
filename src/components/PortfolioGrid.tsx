@@ -15,13 +15,13 @@ export function PortfolioGrid() {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {isPending && (
         [...Array(8)].map((_, i) => (
-          <div key={i} className="h-40 skeleton-loader rounded-xl" />
+          <div key={i} data-testid="asset-skeleton" className="h-40 skeleton-loader rounded-xl" />
         ))
       )}
       {assets.length === 0 && !isPending && (
         <p className="col-span-full text-center text-gray-500">No assets found</p>)}
       {assets.map(asset => (
-        <PortfolioCard key={asset.chainId + asset.symbol} asset={asset} />
+        <PortfolioCard key={asset.chain.id + asset.symbol} asset={asset} />
       ))}
     </div>
   );
