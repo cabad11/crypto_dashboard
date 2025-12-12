@@ -30,7 +30,11 @@ export async function GET(request: NextRequest) {
     const res = await fetch(url, { next: { revalidate: 60 } });
     const data = await res.json();
     let results = [];
-    if (data.status === '1') results = data.result.map((tx: Transaction) => ({
+    if (data.status !== '1' && data.message === 'NOTOK') {
+      console.error('Etherscan error:', data);
+      return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
+    }
+    results = data.result.map((tx: Transaction) => ({
       hash: tx.hash,
       from: tx.from.toLowerCase(),
       to: tx.to?.toLowerCase() || null,
