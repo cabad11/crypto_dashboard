@@ -39,6 +39,10 @@ npm run dev
 npm run build
 npm start
 ```
+### Testing
+```bash
+npm run test          
+npm run test:coverage
 
 ### Tech Stack
 -Next.js 16
@@ -47,3 +51,5 @@ npm start
 -TanStack Query
 -Coingecko API (prices)
 -Etherscan APIs (transactions)
+
+[![Coverage](https://img.shields.io/badge/coverage-87%25-green)](coverage/lcov-report/index.html)
