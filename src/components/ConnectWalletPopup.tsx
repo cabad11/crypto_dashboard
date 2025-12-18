@@ -94,11 +94,7 @@ const ConnectWalletPopup = ({ open, onClose }: { open: boolean, onClose: () => v
             />
           ))}
           {error && (
-            <p className={`
-              mt-4 text-sm text-red-600
-              dark:text-red-400
-            `}
-            >
+            <p className="mt-4 text-sm text-red-600 dark:text-red-400">
               {error.message || 'Failed to connect wallet'}
             </p>
           )}

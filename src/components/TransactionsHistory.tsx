@@ -71,14 +71,8 @@ export function TransactionHistory() {
                         <div className={`
                           flex-center rounded-full p-1
                           ${isOutgoing
-                    ? `
-                      bg-red-100
-                      dark:bg-red-900/30
-                    `
-                    : `
-                      bg-green-100
-                      dark:bg-green-900/30
-                    `}
+                    ? `bg-red-100 dark:bg-red-900/30`
+                    : `bg-green-100 dark:bg-green-900/30`}
                         `}
                         >
                           <span className={clsx(`
@@ -86,14 +80,8 @@ export function TransactionHistory() {
                             material-symbols-light--arrow-right-alt
                           `,
                           isOutgoing
-                            ? `
-                              rotate-90 text-red-600
-                              dark:text-red-400
-                            `
-                            : `
-                              -rotate-90 text-green-600
-                              dark:text-green-400
-                            `)}
+                            ? `rotate-90 text-red-600 dark:text-red-400`
+                            : `-rotate-90 text-green-600 dark:text-green-400`)}
                           />
                         </div>
                         <div>
@@ -112,14 +100,8 @@ export function TransactionHistory() {
                         <p className={`
                           font-semibold
                           ${isOutgoing
-                    ? `
-                      text-red-600
-                      dark:text-red-400
-                    `
-                    : `
-                      text-green-600
-                      dark:text-green-400
-                    `}
+                    ? `text-red-600 dark:text-red-400`
+                    : `text-green-600 dark:text-green-400`}
                         `}
                         >
                           {isOutgoing ? '-' : '+'}

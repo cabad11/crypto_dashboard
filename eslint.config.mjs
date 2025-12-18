@@ -17,6 +17,9 @@ const eslintConfig = defineConfig([
       'better-tailwindcss/no-unregistered-classes': ['error', {
         detectComponentClasses: true,
       }],
+      'better-tailwindcss/enforce-consistent-line-wrapping': ['error', {
+        preferSingleLine: true,
+      }],
       '@stylistic/semi': ['warn', 'always'],
       'react-hooks/set-state-in-effect': 'off',
     },

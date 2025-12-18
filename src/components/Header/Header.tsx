@@ -44,12 +44,7 @@ const Header = () => {
           </Link>
         </div>
 
-        <nav className={`
-          hidden items-center gap-4 text-sm
-          md:flex
-          lg:gap-8
-        `}
-        >
+        <nav className="hidden items-center gap-4 text-sm md:flex lg:gap-8">
           {MENU_ITEMS.map(item => (
             <Link key={item.href} href={item.href} className="text-interactive">{item.label}</Link>),
           )}
@@ -62,11 +57,7 @@ const Header = () => {
           >
             <AccountsMenu />
           </Suspense>
-          <div className={`
-            hidden
-            md:block
-          `}
-          >
+          <div className="hidden md:block">
             <ThemeSwitch />
           </div>
           <MobileMenu />

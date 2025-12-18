@@ -12,13 +12,7 @@ export function PortfolioGrid() {
     return <ErrorMessage message="Failed to load portfolio" refetch={refetch} />;
   }
   return (
-    <div className={`
-      grid grid-cols-1 gap-6
-      sm:grid-cols-2
-      lg:grid-cols-3
-      xl:grid-cols-4
-    `}
-    >
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {isPending && (
         [...Array(8)].map((_, i) => (
           <div

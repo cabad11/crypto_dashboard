@@ -12,21 +12,14 @@ export default function MobileMenu() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`
-          flex-center rounded-md
-          focus:ring-standard
-          md:hidden
-        `}
+        className="flex-center rounded-md focus:ring-standard md:hidden"
       >
         <span className="iconify h-8 w-8 material-symbols-light--menu" />
       </button>
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
-        className={`
-          fixed top-0 z-50 min-h-full w-screen
-          md:hidden
-        `}
+        className="fixed top-0 z-50 min-h-full w-screen md:hidden"
       >
         <DialogBackdrop
           transition
