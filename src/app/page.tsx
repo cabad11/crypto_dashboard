@@ -6,11 +6,7 @@ import MarketOverview from '@/components/MarketOverview';
 
 export default function Home() {
   return (
-    <main className={`
-      page-container mb-6 grid grid-cols-1 gap-6
-      xl:grid-cols-3 xl:grid-rows-2
-    `}
-    >
+    <main className="page-container grid grid-cols-1 gap-6 xl:grid-cols-3">
       <div className="xl:col-span-2">
         <div className="mb-4">
           <h2 className="mb-1 text-2xl font-bold text-standard md:text-3xl">Portfolio Performance</h2>

@@ -7,8 +7,8 @@ type Chain = typeof CHAINS[number];
 const ChainSelect = ({ chain, onChange }: { chain: Chain, onChange: (chain: Chain) => void }) => {
   return (
     <div className={`
-      w-32 rounded-lg border border-gray-300 bg-transparent px-2 py-1
-      text-standard
+      w-32 cursor-pointer rounded-lg border border-gray-300 bg-transparent px-2
+      py-1 text-standard
       focus:outline-none
       md:w-50
       dark:border-gray-600

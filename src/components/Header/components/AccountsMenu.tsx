@@ -1,3 +1,5 @@
+'use client';
+
 import { shortenAddress } from '@/utils/format';
 import WalletAvatar from '@/components/ui/WalletAvatar';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
@@ -6,11 +8,12 @@ import { useWalletPopup } from '@/contexts/PopupContext';
 
 const AddressShort = ({ address }: { address: string }) => {
   return (
-    <span className={`
-      inline rounded-full bg-gray-100 px-2 py-1 text-center align-middle text-xs
-      text-gray-800 ring-standard
-      dark:bg-gray-800 dark:text-gray-200
-    `}
+    <span
+      className={`
+        inline rounded-full bg-gray-100 px-2.5 py-1 text-center align-middle
+        text-xs font-medium text-gray-800 ring-1 ring-gray-200/60
+        dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-700/60
+      `}
     >
       {shortenAddress(address as string)}
     </span>
@@ -31,22 +34,34 @@ const AccountsMenu = () => {
       {isConnected
         ? (
             <Menu>
-              <MenuButton className={`
-                flex-center gap-2 rounded-lg bg-white p-2 ring-standard
-                hover:bg-gray-100
-                dark:bg-black dark:hover:bg-gray-800/20
-              `}
+              <MenuButton
+                className={`
+                  flex-center gap-2 rounded-lg bg-white px-3 py-2 shadow-sm
+                  ring-standard transition-all
+                  hover:bg-gray-50 hover:shadow-md
+                  dark:bg-gray-900 dark:hover:bg-gray-800
+                `}
               >
-                <span className="iconify text-standard line-md--chevron-down"></span>
                 <WalletAvatar address={currentAddress as string} />
                 <AddressShort address={currentAddress as string} />
+                <span className={`
+                  iconify text-gray-600 transition-transform
+                  line-md--chevron-small-down
+                  group-data-open:rotate-180
+                  dark:text-gray-400
+                `}
+                >
+                </span>
               </MenuButton>
               <MenuItems
-                anchor="bottom"
+                anchor="bottom end"
+                transition
                 className={`
-                  z-41 mt-2 w-40 origin-top-right rounded-md background-standard
-                  shadow-lg ring-standard
+                  z-41 mt-2 w-50 origin-top-right rounded-lg bg-white p-2
+                  shadow-lg ring-standard transition duration-200 ease-out
                   focus:outline-none
+                  data-closed:scale-95 data-closed:opacity-0
+                  dark:bg-gray-900
                 `}
               >
                 {connections
@@ -56,8 +71,10 @@ const AccountsMenu = () => {
                       <MenuItem key={connection.connector.id}>
                         <div
                           className={`
-                            flex-center cursor-pointer gap-2 rounded-md
-                            button-hover p-2
+                            flex-center cursor-pointer gap-2 rounded-md px-3
+                            py-2 transition-colors
+                            hover:bg-gray-100
+                            dark:hover:bg-gray-800
                           `}
                           onClick={() => switchConnection({ connector: connection.connector })}
                         >
@@ -71,11 +88,14 @@ const AccountsMenu = () => {
                   <button
                     type="button"
                     className={`
-                      flex-center w-full rounded-md button-hover px-3 py-2
-                      text-standard
+                      flex-center w-full rounded-md px-3 py-2 text-sm
+                      font-medium text-gray-700 transition-colors
+                      hover:bg-gray-100
+                      dark:text-gray-300 dark:hover:bg-gray-800
                     `}
                     onClick={handleWalletClick}
                   >
+                    <span className="mr-2 iconify material-symbols-light--add"></span>
                     Add Wallet
                   </button>
                 </MenuItem>
@@ -87,13 +107,15 @@ const AccountsMenu = () => {
               type="button"
               onClick={handleWalletClick}
               className={`
-                flex-center rounded-md button-hover px-3 py-2 text-standard
+                flex-center rounded-lg bg-linear-to-r from-indigo-600
+                to-purple-600 px-4 py-2 text-sm font-semibold text-white
+                shadow-sm transition-all
+                hover:from-indigo-700 hover:to-purple-700 hover:shadow-md
               `}
             >
               Connect Wallet
             </button>
           )}
-
     </>
   );
 };

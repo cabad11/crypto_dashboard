@@ -12,12 +12,8 @@
   @apply mx-auto w-full p-4 lg:px-8 lg:py-8 md:w-190 xl:w-6xl;
 }
 
-@utility background-interactive {
-  @apply transition-all duration-200 bg-neutral-50 dark:bg-neutral-900 hover:bg-neutral-100 hover:dark:bg-neutral-800;
-}
-
 @utility text-standard {
-  @apply text-gray-900 dark:text-white;
+  @apply text-gray-900 dark:text-gray-100;
 }
 
 @utility text-interactive {
@@ -65,11 +61,6 @@
 @utility scrollbar-standard {
   @apply scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent;
 }
-
-@utility button-hover {
-  @apply hover:bg-gray-50 dark:hover:bg-gray-900 transition-all duration-200;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);

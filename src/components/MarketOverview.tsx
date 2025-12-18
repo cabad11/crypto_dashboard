@@ -70,7 +70,7 @@ export default function MarketOverview() {
             <div
               key={coin.symbol}
               className={`
-                group rounded-lg border border-gray-200/60 bg-gray-50/50 p-3
+                rounded-lg border border-gray-200/60 bg-gray-50/50 p-3
                 transition-all duration-300
                 hover:border-gray-300 hover:bg-gray-50
                 dark:border-gray-800/60 dark:bg-gray-900/50

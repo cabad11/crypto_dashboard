@@ -1,19 +1,16 @@
 'use client';
-import { useConnect, useConnection, Connector, Config, useConnectors } from 'wagmi';
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-  CloseButton,
-  useClose,
-} from '@headlessui/react';
+import { useConnect, useConnection, type Connector, type Config, useConnectors } from 'wagmi';
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, CloseButton, useClose } from '@headlessui/react';
 import Image from 'next/image';
 import { getConnectorMeta } from '@/utils/web3/connectorsMeta';
 import { useState } from 'react';
-import { ConnectMutate } from 'wagmi/query';
+import type { ConnectMutate } from 'wagmi/query';
 
-const ConnectButton = ({ connector, connect, isPending }: { connector: Connector, connect: ConnectMutate<Config, unknown>, isPending: boolean }) => {
+const ConnectButton = ({
+  connector,
+  connect,
+  isPending,
+}: { connector: Connector, connect: ConnectMutate<Config, unknown>, isPending: boolean }) => {
   const close = useClose();
   const [isConnecting, setIsConnecting] = useState<boolean>(false);
   const meta = getConnectorMeta(connector);
@@ -27,14 +24,26 @@ const ConnectButton = ({ connector, connect, isPending }: { connector: Connector
       }}
       disabled={isPending}
       className={`
-        flex w-full items-center gap-3 rounded-lg button-hover p-4 ring-standard
+        flex w-full cursor-pointer items-center gap-4 rounded-lg bg-white p-4
+        shadow-sm ring-1 ring-gray-200/60 transition-all
+        hover:bg-gray-50 hover:shadow-md
+        disabled:cursor-not-allowed disabled:opacity-50
+        dark:bg-gray-900 dark:ring-gray-800/60 dark:hover:bg-gray-800
       `}
     >
-      {icon && <Image width={32} height={32} className="text-2xl" src={icon} alt="wallet_icon" />}
-      <span className="font-medium text-standard">
+      {icon && (
+        <Image width={40} height={40} className="rounded-lg" src={icon} alt="wallet_icon" />
+      )}
+      <span className="text-base font-semibold text-standard">
         {meta?.name || connector.name}
       </span>
-      {isConnecting && <span className="iconify line-md--loading-twotone-loop" />}
+      {isConnecting && (
+        <span className={`
+          iconify text-indigo-600 line-md--loading-twotone-loop
+          dark:text-indigo-400
+        `}
+        />
+      )}
     </button>
   );
 };
@@ -57,46 +66,78 @@ const ConnectWalletPopup = ({ open, onClose }: { open: boolean, onClose: () => v
       <DialogBackdrop
         transition
         className={`
-          absolute inset-0 bg-black/30 duration-300 ease-out
+          absolute inset-0 bg-black/40 backdrop-blur-sm duration-300 ease-out
           data-closed:opacity-0
         `}
       />
       <DialogPanel
         transition
         className={`
-          relative inset-2 z-60 flex-center h-min w-xs flex-col rounded-lg
-          background-standard p-6 ring-standard duration-300 ease-out
+          card-standard relative inset-2 z-60 flex-center h-min w-full max-w-md
+          flex-col duration-300 ease-out
           data-closed:scale-95 data-closed:opacity-0
         `}
       >
         {isConnected && (
-          <CloseButton className="group absolute top-2 right-2 cursor-pointer">
-            <span className={`
-              iconify h-8 w-8 text-interactive-group
-              material-symbols-light--close-small-rounded
+          <CloseButton
+            className={`
+              group absolute top-4 right-4 flex-center h-8 w-8 cursor-pointer
+              rounded-lg transition-colors
+              hover:bg-gray-100
+              dark:hover:bg-gray-800
             `}
+          >
+            <span
+              className={`
+                iconify h-6 w-6 text-gray-600 transition-colors
+                material-symbols-light--close-small-rounded
+                group-hover:text-gray-900
+                dark:text-gray-400 dark:group-hover:text-gray-100
+              `}
             />
           </CloseButton>
-        ) }
-        <DialogTitle className={`
-          mb-6 text-center text-lg font-bold text-standard
-        `}
-        >
-          Connect a Wallet
-        </DialogTitle>
+        )}
+        <div className="mb-6 flex-center flex-col gap-3">
+          <div
+            className={`
+              flex-center h-12 w-12 rounded-xl bg-linear-to-br from-indigo-500
+              via-purple-500 to-pink-500
+            `}
+          >
+            <span className={`
+              iconify h-7 w-7 text-white material-symbols-light--wallet
+            `}
+            />
+          </div>
+          <DialogTitle
+            className="text-center text-xl font-bold text-standard"
+          >
+            Connect a Wallet
+          </DialogTitle>
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+            Choose your preferred wallet to continue
+          </p>
+        </div>
         <div className="w-full space-y-3">
           {connectors.map(connector => (
-            <ConnectButton
-              key={connector.id}
-              connector={connector}
-              connect={connect}
-              isPending={isPending}
-            />
+            <ConnectButton key={connector.id} connector={connector} connect={connect} isPending={isPending} />
           ))}
           {error && (
-            <p className="mt-4 text-sm text-red-600 dark:text-red-400">
-              {error.message || 'Failed to connect wallet'}
-            </p>
+            <div
+              className={`
+                mt-4 flex items-start gap-2 rounded-lg bg-red-50 p-3 ring-1
+                ring-red-200/60
+                dark:bg-red-950/20 dark:ring-red-900/60
+              `}
+            >
+              <span className={`
+                mt-0.5 iconify h-5 w-5 shrink-0 text-red-600
+                material-symbols-light--error
+                dark:text-red-400
+              `}
+              />
+              <p className="text-sm text-red-700 dark:text-red-300">{error.message || 'Failed to connect wallet'}</p>
+            </div>
           )}
         </div>
       </DialogPanel>
