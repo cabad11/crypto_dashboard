@@ -62,7 +62,7 @@ export function PortfolioCard({ asset }: { asset: ASSET_DATA }) {
           >
             <span className="text-xs font-medium text-interactive">Balance:</span>
             <span className="text-sm font-semibold text-nowrap text-standard">
-              {Number(asset.balance).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 6 })}
+              {Number(asset.balance).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 })}
               {' '}
               {asset.symbol}
             </span>

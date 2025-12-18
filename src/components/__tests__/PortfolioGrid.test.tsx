@@ -76,9 +76,9 @@ describe('PortfolioGrid', () => {
   it('displays token symbol, chain name, balance, usd value, 24h change correctly', async () => {
     const screen = await render(<PortfolioGrid />);
 
-    await expect.element(screen.getByRole('heading', { name: 'Ether (ETH)' })).toBeInTheDocument();
+    await expect.element(screen.getByRole('heading', { name: 'Ether(ETH)' })).toBeInTheDocument();
     await expect.element(screen.getByRole('heading', { name: 'BASE' })).toBeInTheDocument();
-    await expect.element(screen.getByRole('heading', { name: 'Tether (USDT)' })).toBeInTheDocument();
+    await expect.element(screen.getByRole('heading', { name: 'Tether(USDT)' })).toBeInTheDocument();
 
     // Network names
     await expect.element(screen.getByText(mainnet.name, { exact: true })).toBeInTheDocument();
@@ -86,12 +86,12 @@ describe('PortfolioGrid', () => {
     await expect.element(screen.getByText(polygon.name, { exact: true }), {}).toBeInTheDocument();
 
     // Token balances and USD values
-    await expect.element(screen.getByText('1.5 ETH', { exact: true })).toBeInTheDocument();
-    await expect.element(screen.getByText('$4,800', { exact: true })).toBeInTheDocument();
-    await expect.element(screen.getByText('1,000 BASE', { exact: true })).toBeInTheDocument();
-    await expect.element(screen.getByText('$1,000', { exact: true })).toBeInTheDocument();
-    await expect.element(screen.getByText('200 USDT', { exact: true })).toBeInTheDocument();
-    await expect.element(screen.getByText('$200', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('1.50 ETH', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('$4,800.00', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('1,000.00 BASE', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('$1,000.00', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('200.00 USDT', { exact: true })).toBeInTheDocument();
+    await expect.element(screen.getByText('$200.00', { exact: true })).toBeInTheDocument();
 
     // 24h change
     await expect.element(screen.getByText('-2.00%', { exact: true })).toBeInTheDocument();
