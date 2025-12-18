@@ -50,22 +50,6 @@ export default function MobileMenu() {
             dark:bg-stone-900
           `}
         >
-          <button
-            onClick={() => setIsOpen(false)}
-            className={`
-              absolute top-4 right-4 flex-center h-8 w-8 rounded-lg
-              transition-colors
-              hover:bg-gray-200/60
-              dark:hover:bg-gray-800/60
-            `}
-          >
-            <span className={`
-              iconify h-5 w-5 text-gray-700 material-symbols-light--close
-              dark:text-gray-300
-            `}
-            />
-          </button>
-
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-standard">
               Theme

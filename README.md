@@ -10,7 +10,14 @@ Supports Ethereum, Polygon, Arbitrum, Base, Optimism and many more.
 
 Demo: https://crypto-dashboard-tau-five.vercel.app/
 
+### Light theme
 ![Preview](./preview.png)
+
+### Dark theme 
+![Preview](./preview2.png)
+
+### Mobile
+![Preview](./preview3.png)
 
 ## Features
 - Instant wallet connection (MetaMask, WalletConnect, etc.)
@@ -56,3 +63,5 @@ npm run test:coverage
 - TanStack Query
 - Coingecko API (prices)
 - Etherscan APIs (transactions)
+
+UI redesigned using v0.dev for modern look

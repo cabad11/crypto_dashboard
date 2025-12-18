@@ -33,8 +33,8 @@ const Header = () => {
         <div className="flex w-48 items-center gap-3">
           <div
             className={`
-              h-8 w-8 rounded-lg bg-linear-to-br from-indigo-500 via-purple-500
-              to-pink-500 shadow-md transition-transform
+              h-8 w-8 shrink-0 rounded-lg bg-linear-to-br from-indigo-500
+              via-purple-500 to-pink-500 shadow-md transition-transform
               hover:scale-105 hover:shadow-lg
             `}
           />
@@ -68,7 +68,7 @@ const Header = () => {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex min-w-8 items-center gap-3">
           <Suspense fallback={(
             <div className="h-9 w-36 skeleton-loader rounded-lg" />
           )}

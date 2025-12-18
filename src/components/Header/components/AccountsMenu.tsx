@@ -10,8 +10,8 @@ const AddressShort = ({ address }: { address: string }) => {
   return (
     <span
       className={`
-        inline rounded-full bg-gray-100 px-2.5 py-1 text-center align-middle
-        text-xs font-medium text-gray-800 ring-1 ring-gray-200/60
+        inline truncate rounded-full bg-gray-100 px-2.5 py-1 text-center
+        align-middle text-xs font-medium text-gray-800 ring-1 ring-gray-200/60
         dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-700/60
       `}
     >
@@ -36,8 +36,8 @@ const AccountsMenu = () => {
             <Menu>
               <MenuButton
                 className={`
-                  flex-center gap-2 rounded-lg bg-white px-3 py-2 shadow-sm
-                  ring-standard transition-all
+                  flex-center min-w-12 gap-2 rounded-lg bg-white px-3 py-2
+                  shadow-sm ring-standard transition-all
                   hover:bg-gray-50 hover:shadow-md
                   dark:bg-gray-900 dark:hover:bg-gray-800
                 `}

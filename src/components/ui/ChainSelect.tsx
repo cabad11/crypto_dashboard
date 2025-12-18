@@ -7,7 +7,7 @@ type Chain = typeof CHAINS[number];
 const ChainSelect = ({ chain, onChange }: { chain: Chain, onChange: (chain: Chain) => void }) => {
   return (
     <div className={`
-      w-32 cursor-pointer rounded-lg border border-gray-300 bg-transparent px-2
+      w-40 cursor-pointer rounded-lg border border-gray-300 bg-transparent px-2
       py-1 text-standard
       focus:outline-none
       md:w-50
@@ -27,7 +27,7 @@ const ChainSelect = ({ chain, onChange }: { chain: Chain, onChange: (chain: Chai
         <ListboxOptions
           anchor="bottom"
           className={`
-            mt-3 scrollbar-standard flex max-h-60 w-32 flex-col gap-2
+            mt-3 scrollbar-standard flex max-h-60 w-40 flex-col gap-2
             overflow-y-auto rounded-md background-standard p-1 text-standard
             shadow-lg ring-standard
             focus:outline-none

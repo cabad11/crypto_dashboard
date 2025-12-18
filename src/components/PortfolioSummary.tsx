@@ -21,28 +21,30 @@ export default function PortfolioSummary() {
     },
     {
       label: 'Best Token',
-      value: bestPerformer && (
-        <div className="flex items-center gap-1">
-          {bestPerformer?.symbol}
-          <div
-            className={`rounded-md px-2 py-0.5 text-xs font-semibold ${
-              bestPerformer?.change24h >= 0
-                ? `
+      value: bestPerformer
+        ? (
+            <div className="flex items-center gap-1">
+              {bestPerformer?.symbol}
+              <div
+                className={`rounded-md px-2 py-0.5 text-xs font-semibold ${
+                  bestPerformer?.change24h >= 0
+                    ? `
                         bg-green-100 text-green-700
                         dark:bg-green-950/30 dark:text-green-400
                       `
-                : `
+                    : `
                         bg-red-100 text-red-700
                         dark:bg-red-950/30 dark:text-red-400
                       `
-            }`}
-          >
-            {bestPerformer?.change24h >= 0 ? '+' : ''}
-            {bestPerformer?.change24h.toFixed(2)}
-            %
-          </div>
-        </div>
-      ),
+                }`}
+              >
+                {bestPerformer?.change24h >= 0 ? '+' : ''}
+                {bestPerformer?.change24h.toFixed(2)}
+                %
+              </div>
+            </div>
+          )
+        : '-',
       icon: 'material-symbols-light--trending-up',
       color: 'cyan',
       bgClass: 'bg-cyan-50 dark:bg-cyan-950/30',
