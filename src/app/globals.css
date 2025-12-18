@@ -6,21 +6,14 @@
   prefixes: line-md, material-symbols-light, token-branded;
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@custom-variant dark (&:is(.dark *));
 
 @utility page-container {
-  @apply mx-auto w-full p-4 lg:px-8 lg:py-8 md:w-190 lg:w-6xl;
+  @apply mx-auto w-full p-4 lg:px-8 lg:py-8 md:w-190 xl:w-6xl;
 }
 
 @utility background-interactive {
-  @apply transition bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 hover:dark:bg-neutral-700;
+  @apply transition-all duration-200 bg-neutral-50 dark:bg-neutral-900 hover:bg-neutral-100 hover:dark:bg-neutral-800;
 }
 
 @utility text-standard {
@@ -28,11 +21,11 @@
 }
 
 @utility text-interactive {
-  @apply text-gray-600 hover:text-black dark:text-white dark:hover:text-gray-400 transition-colors;
+  @apply text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors duration-200;
 }
 
 @utility text-interactive-group {
-  @apply text-gray-600 group-hover:text-black dark:text-white dark:group-hover:text-gray-400 transition-colors;
+  @apply text-gray-600 group-hover:text-black dark:text-gray-300 dark:group-hover:text-white transition-colors duration-200;
 }
 
 @utility flex-center {
@@ -40,19 +33,33 @@
 }
 
 @utility skeleton-loader {
-  @apply bg-gray-200 dark:bg-gray-800 rounded animate-pulse;
+  @apply bg-linear-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded animate-pulse;
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @utility ring-standard {
-  @apply ring-1 ring-gray-200 dark:ring-gray-800;
+  @apply ring-1 ring-gray-200/80 dark:ring-gray-800/80;
 }
 
 @utility background-standard {
-  @apply bg-neutral-100 dark:bg-neutral-900;
+  @apply bg-white dark:bg-neutral-950;
 }
 
 @utility card-standard {
-  @apply background-standard ring-standard rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden
+  @apply background-standard ring-standard
+         rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md dark:shadow-none
+         transition-all duration-300 relative overflow-hidden
+         backdrop-blur-sm;
 }
 
 @utility scrollbar-standard {
@@ -60,11 +67,19 @@
 }
 
 @utility button-hover {
-  @apply hover:bg-gray-50 dark:hover:bg-gray-700 transition;
+  @apply hover:bg-gray-50 dark:hover:bg-gray-900 transition-all duration-200;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*:focus-visible {
+  @apply outline-none ring-2 ring-emerald-500/50 ring-inset dark:ring-offset-neutral-950;
 }
